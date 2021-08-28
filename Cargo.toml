@@ -1,8 +1,8 @@
 [package]
-name = "loc"
+name = "loec"
 version = "0.5.0"
-description = "Count lines of code (cloc) fast."
-authors = ["Curtis Gagliardi <curtis@curtis.io>"]
+description = "Count and estimate the cost of lines of code (cloc) fast."
+authors = ["Curtis Gagliardi <curtis@curtis.io>", "Owen Griffiths <root@ogriffiths.com>"]
 
 repository = "https://github.com/cgag/loc"
 homepage = "https://github.com/cgag/loc"
@@ -19,6 +19,7 @@ num_cpus      = "1.8.0"
 ignore        = "0.4.2"
 edit-distance = "2.0.1"
 smallvec      = "0.6.5"
+rusty-money   = "0.4.1"
 
 [profile.release]
 incremental = false

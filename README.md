@@ -1,29 +1,26 @@
-2019-10-07: I really haven't been on top of accepting pull requests or looking at issues, you guy should definitely look at [SCC](https://github.com/boyter/scc).  It's faster and more accurate than this, and Boyter has written a great series of blog posts detailing how it got this way:  [https://boyter.org/posts/sloc-cloc-code/](https://boyter.org/posts/sloc-cloc-code/)
+# loec
 
-2018-03-08:
-I saw a bunch of stars pop up and thought I should mention that tokei is smarter and more accurate so please give that a look and see if there are any wild discrepancies (mostly for your benefit but please let me know if so).  Tokei is linked below but it's also rust so `cargo install tokei` is all you need.  Also these benchmarks are quite old. I doubt cloc has changed but tokei probably has. 
+Count and estimate the cost of lines of code (cloc) fast.
 
-`loc` is a tool for counting lines of code. It's a rust implementation of [cloc](http://cloc.sourceforge.net/), but it's more than 100x faster. There's another rust code counting tool called [tokei](https://github.com/Aaronepower/tokei), loc is ~2-10x faster than tokei, depending on how many files are being counted.
+## Why this?
 
-I can count my 400k file `src` directory (thanks npm) in just under 7 seconds with loc, in a 1m14s with tokei, and I'm not even willing to try with cloc.
+This repository is a fork of the now-abandoned but fantastic [`loc`](https://github.com/cgag/loc) crate with extra [COCOMO](https://en.wikipedia.org/wiki/COCOMO) estimation features built on top, which now allows this program to rival [`scc`](https://github.com/boyter/scc) in usability.
 
-Counting just the dragonflybsd codebase (~9 million lines):
-  - loc: 1.09 seconds
-  - tokei: 5.3 seconds
-  - cloc: 1 minute, 50 seconds
+The only real reason to use this fork over the aforementioned `scc` is this is written in Rust and therefore ships as a static (a.k.a. single) binary instead of shipping with any real dependencies.
 
-### Installation
+## Installation
 
-There are binaries available on the [releases page](https://github.com/cgag/loc/releases), thanks to the wonderful rust-everywhere project and travisci. For anyone familiar with Rust there's `cargo install loc`.
-If you want to install Rust/Cargo, this is probably the easiest way: [https://www.rustup.rs/](https://www.rustup.rs/).
+**[Download]((https://github.com/owez/loec/releases))**
 
-#### Windows
+Currently, the releases page linked above is the only way to download this package.
+
+### Windows
 
 `loc` should now compile on Windows, but you can also run it under Windows using linux emulation:
 
-> You can run `loc` on Windows 10 Anniversary Update build 14393 or later using the [Windows Subsystem for Linux](https://msdn.microsoft.com/de-de/commandline/wsl/install_guide?f=255&MSPPError=-2147217396). Simply download the Linux distribution from the [releases page](https://github.com/cgag/loc/releases), and run it in `bash` using a WSL-compatible path (e.g. `/mnt/c/Users/Foo/Repo/` instead of `C:\Users\Foo\Repo`).
+> You can run `loc` on Windows 10 Anniversary Update build 14393 or later using the [Windows Subsystem for Linux](https://msdn.microsoft.com/de-de/commandline/wsl/install_guide?f=255&MSPPError=-2147217396). Simply download the Linux distribution from the [releases page](https://github.com/owez/loec/releases), and run it in `bash` using a WSL-compatible path (e.g. `/mnt/c/Users/Foo/Repo/` instead of `C:\Users\Foo\Repo`).
 
-### Usage
+## Usage
 
 By default, `loc` will count lines of code in a target directory:
 
@@ -128,7 +125,7 @@ loc --exclude 'sh$'
 ```
 
 
-### Known Issues
+## Known Issues
 Fortran has a rule that comments must start with the first character of a line. I only check if it's the first non-whitespace character of a line. I don't know
 how often this is a problem in real code.  I would think not often.
 
@@ -149,7 +146,7 @@ Ignored and hidden files:
 By default, loc respects .gitignore/.ignore files, and ignores hidden files and directories.  You can count disregard
 ignore files with `loc -u`, and include hidden files/dirs with `loc -uu`.
 
-### Supported Languages
+## Supported Languages
 
 - ActionScript
 - Ada
@@ -260,6 +257,4 @@ ignore files with `loc -u`, and include hidden files/dirs with `loc -uu`.
 
 ## Attributions
 
-This project contains code from [Tokei](https://github.com/Aaronepower/tokei) by [Aaronepower](https://github.com/Aaronepower) and [ripgrep](https://github.com/BurntSushi/ripgrep) by [BurntSushi](https://github.com/BurntSushi).
-
-### Contributors
+This project contains code from [Tokei](https://github.com/Aaronepower/tokei) by [Aaronepower](https://github.com/Aaronepower), [ripgrep](https://github.com/BurntSushi/ripgrep) by [BurntSushi](https://github.com/BurntSushi) and [scc](https://github.com/boyter/scc/) by [boyter](https://github.com/boyter/).

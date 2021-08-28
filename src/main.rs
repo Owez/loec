@@ -1,4 +1,5 @@
-extern crate loc;
+extern crate loec;
+extern crate rusty_money;
 
 #[macro_use]
 extern crate clap;
@@ -10,6 +11,7 @@ extern crate edit_distance;
 
 use clap::{Arg, App, AppSettings};
 use ignore::WalkBuilder;
+use rusty_money::{Money, iso::USD};
 
 use std::collections::HashMap;
 use std::collections::hash_map::Entry;
@@ -20,7 +22,8 @@ use deque::{Stealer, Stolen};
 use regex::Regex;
 use edit_distance::edit_distance as distance;
 
-use loc::*;
+mod cocomo;
+use loec::*;
 
 enum Work {
     File(String),
@@ -278,7 +281,7 @@ fn main() {
 
         // TODO(cgag): do the summing first, so we can do additional sorting
         // by totals.
-        for (lang, mut filecounts) in by_lang {
+        for (lang, mut filecounts) in by_lang.clone() {
             let mut total = Count::default();
             for fc in &filecounts {
                 total.merge(&fc.count);
@@ -341,7 +344,6 @@ fn main() {
 
         print_totals_by_lang(&linesep, &totals_by_lang);
     }
-
 }
 
 // TODO(cgag): i think this is in the stdlib
@@ -398,5 +400,14 @@ fn print_totals_by_lang(linesep: &str, totals_by_lang: &[(&&Lang, &LangTotal)]) 
              totals.count.blank,
              totals.count.comment,
              totals.count.code);
-    println!("{}", linesep);
+    
+    // cost estimation
+    let (cost,months,people) = cocomo::calc(totals.count.lines as usize);
+    let is_months = if months > 1.0 && months < 2.0 {
+        ""
+    } else {
+        "s"
+    };
+    let formatted_cost = Money::from_major(cost as i64, USD);
+    println!("{}\nEstimated Cost to Develop (organic) {}\nEstimated Schedule Effort (organic) {} month{}\nEstimated People Required (organic) {}\n{}", linesep,formatted_cost,months,is_months,people,linesep);
 }

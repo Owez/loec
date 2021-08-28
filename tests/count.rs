@@ -1,6 +1,6 @@
-extern crate loc;
+extern crate loec;
 
-use loc::*;
+use loec::*;
 
 // Because I can.  Seems bad though. Need a test runner with better output, or neeed to learn
 macro_rules! test_count {

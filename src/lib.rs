@@ -594,6 +594,7 @@ impl<'a> Iterator for ByteLinesState<'a> {
 
 // TODO(cgag): do we have to worry about the case of single line comments being nested in multis?
 // I dn't think so but i should think about it.
+#[allow(unused_mut)]
 pub fn count(filepath: &str) -> Count {
     let lang = lang_from_ext(filepath);
     let (singles, multis) = counter_config_for_lang(lang);
