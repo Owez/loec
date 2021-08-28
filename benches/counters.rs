@@ -1,10 +1,10 @@
 #![feature(test)]
 extern crate test;
-extern crate loc;
+extern crate loec;
 
 use test::Bencher;
 
-use loc::*;
+use loec::*;
 
 #[bench]
 fn test_count_c(b: &mut Bencher) {

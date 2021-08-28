@@ -1,6 +1,6 @@
 # loec
 
-Count and estimate the cost of lines of code (cloc) fast.
+Count and estimate the cost of lines of code (cloec) fast.
 
 ## Why this?
 
@@ -10,22 +10,16 @@ The only real reason to use this fork over the aforementioned `scc` is this is w
 
 ## Installation
 
-**[Download]((https://github.com/owez/loec/releases))**
+- [**Download**]((https://github.com/owez/loec/releases))
 
 Currently, the releases page linked above is the only way to download this package.
 
-### Windows
-
-`loc` should now compile on Windows, but you can also run it under Windows using linux emulation:
-
-> You can run `loc` on Windows 10 Anniversary Update build 14393 or later using the [Windows Subsystem for Linux](https://msdn.microsoft.com/de-de/commandline/wsl/install_guide?f=255&MSPPError=-2147217396). Simply download the Linux distribution from the [releases page](https://github.com/owez/loec/releases), and run it in `bash` using a WSL-compatible path (e.g. `/mnt/c/Users/Foo/Repo/` instead of `C:\Users\Foo\Repo`).
-
 ## Usage
 
-By default, `loc` will count lines of code in a target directory:
+By default, `loec` will count lines of code in a target directory:
 
 ``` shell
-$ loc
+$ loec
 --------------------------------------------------------------------------------
  Language             Files        Lines        Blank      Comment         Code
 --------------------------------------------------------------------------------
@@ -49,7 +43,7 @@ $ loc
 You can also pass one or many targets for it to inspect
 
 ``` shell
-$ loc ci benches
+$ loec ci benches
 --------------------------------------------------------------------------------
  Language             Files        Lines        Blank      Comment         Code
 --------------------------------------------------------------------------------
@@ -63,7 +57,7 @@ $ loc ci benches
 To see stats for *each file* parsed, pass the `--files` flag:
 
 ```sh
-$ loc --files src
+$ loec --files src
 --------------------------------------------------------------------------------
  Language             Files        Lines        Blank      Comment         Code
 --------------------------------------------------------------------------------
@@ -78,7 +72,7 @@ By default, the columns will be sorted by `Code` counted in descending order. Yo
 using the `--sort` flag:
 
 ``` shell
-$ loc --files --sort Comment ci
+$ loec --files --sort Comment ci
 --------------------------------------------------------------------------------
  Language             Files        Lines        Blank      Comment         Code
 --------------------------------------------------------------------------------
@@ -92,10 +86,10 @@ $ loc --files --sort Comment ci
 
 ```
 
-`loc` can also be called with regexes to match and/or exclude files.
+`loec` can also be called with regexes to match and/or exclude files.
 
 ``` shell
-$ loc --include 'count'
+$ loec --include 'count'
 --------------------------------------------------------------------------------
  Language             Files        Lines        Blank      Comment         Code
 --------------------------------------------------------------------------------
@@ -105,7 +99,7 @@ $ loc --include 'count'
 ```
 
 ``` shell
-loc --exclude 'sh$'
+loec --exclude 'sh$'
 --------------------------------------------------------------------------------
  Language             Files        Lines        Blank      Comment         Code
 --------------------------------------------------------------------------------
@@ -138,13 +132,13 @@ because that would be too long \
 */";
 ```
 
-loc counts the first line and last lines correctly as code, but the middle
+loec counts the first line and last lines correctly as code, but the middle
 lines will be incorrectly counted as comments.
 
 Ignored and hidden files:
 
-By default, loc respects .gitignore/.ignore files, and ignores hidden files and directories.  You can count disregard
-ignore files with `loc -u`, and include hidden files/dirs with `loc -uu`.
+By default, loec respects .gitignore/.ignore files, and ignores hidden files and directories.  You can count disregard
+ignore files with `loec -u`, and include hidden files/dirs with `loec -uu`.
 
 ## Supported Languages
 
